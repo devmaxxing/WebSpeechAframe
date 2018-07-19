@@ -22,20 +22,10 @@ var webServer = http.createServer(app);
 var socketServer = socketIo.listen(webServer, {"log level":1});
 
 var myIceServers = [
-  {"url":"stun:stun.l.google.com:19302"},
-  {"url":"stun:stun1.l.google.com:19302"},
-  {"url":"stun:stun2.l.google.com:19302"},
-  {"url":"stun:stun3.l.google.com:19302"}
-  // {
-  //   "url":"turn:[ADDRESS]:[PORT]",
-  //   "username":"[USERNAME]",
-  //   "credential":"[CREDENTIAL]"
-  // },
-  // {
-  //   "url":"turn:[ADDRESS]:[PORT][?transport=tcp]",
-  //   "username":"[USERNAME]",
-  //   "credential":"[CREDENTIAL]"
-  // }
+    {"url":"stun:stun.l.google.com:19302"},
+    {"url":"stun:stun1.l.google.com:19302"},
+    {"url":"stun:stun2.l.google.com:19302"},
+    {"url":"stun:stun3.l.google.com:19302"}
 ];
 easyrtc.setOption("appIceServers", myIceServers);
 easyrtc.setOption("logLevel", "debug");
