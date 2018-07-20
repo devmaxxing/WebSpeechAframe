@@ -47,19 +47,46 @@ AFRAME.registerComponent('web-speech-display', {
     },
 
     start: function() {
-      console.log('test');
+      console.log('Begin Speaking');
       this.recognizer.start();
     },
 
     displayResult: function(event) {
+      console.log('displayresults');
+      var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?";
+      var keyAPI = "trnsl.1.1.20180720T145714Z.8dca8fdab5b97385.c5fea43191927e8cec35dd294475dbaa79dc17c1";
+
       if (event.results.length > 0) {
           var result = event.results[event.results.length-1];
           if(result.isFinal) {
+            //translation starts
+            var textApi = result[0].transcript
+            var langApi = 'en'
+            var data = "key=" + keyAPI + "&text=" + textApi + "&lang=" + langApi;
+            var xhr = new XMLHttpRequest()
+            xhr.open("POST",url,true);
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send(data);
+            xhr.onreadystatechange = function() {
+              console.log('flag1')
+              if (this.readyState==4 && this.status==200) {
+                  var res = this.responseText;
+                  var json = JSON.parse(res);
+                  console.log('flag3')
+                  if(json.code == 200) {
+                    console.log('flag4')
+                    console.log("Translation Results: " + json.text[0]);
+                  }
+                  else {
+                    console.log("Error Code: " + json.code);
+                  }
+              }
+            }
               this.el.setAttribute('text', {value: result[0].transcript});
               setTimeout(()=>{
                 this.el.setAttribute('text', {value: ''});
               }, this.data.timeout * 1000);
-              console.log(result[0].transcript);
+              console.log("Pre-Translate: " + result[0].transcript);
           }
       }
     }
