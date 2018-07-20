@@ -58,6 +58,14 @@ AFRAME.registerComponent('web-speech-display', {
 
       if (event.results.length > 0) {
           var result = event.results[event.results.length-1];
+          this.el.setAttribute('text', {value: result[0].transcript});
+          if (this.timeout) {
+            clearTimeout(this.timeout);
+          }
+          this.timeout = setTimeout(()=>{
+            this.el.setAttribute('text', {value: ''});
+          }, this.data.timeout * 1000);
+          console.log("Pre-Translate: " + result[0].transcript);
           if(result.isFinal) {
             //translation starts
             var textApi = result[0].transcript
@@ -89,14 +97,6 @@ AFRAME.registerComponent('web-speech-display', {
                   }
               }
             }
-              this.el.setAttribute('text', {value: result[0].transcript});
-              if (this.timeout) {
-                clearTimeout(this.timeout);
-              }
-              this.timeout = setTimeout(()=>{
-                this.el.setAttribute('text', {value: ''});
-              }, this.data.timeout * 1000);
-              console.log("Pre-Translate: " + result[0].transcript);
           }
       }
     }
