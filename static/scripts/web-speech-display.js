@@ -67,16 +67,19 @@ AFRAME.registerComponent('web-speech-display', {
             xhr.open("POST",url,true);
             xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xhr.send(data);
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = () => {
               console.log('flag1')
-              if (this.readyState==4 && this.status==200) {
-                  var res = this.responseText;
+              if (xhr.readyState==4 && xhr.status==200) {
+                  var res = xhr.responseText;
                   var json = JSON.parse(res);
                   console.log('flag3')
                   if(json.code == 200) {
                     console.log('flag4')
                     console.log("Translation Results: " + json.text[0]);
                     this.el.setAttribute('text', {value: json.text[0]});
+                    setTimeout(()=>{
+                      this.el.setAttribute('text', {value: ''});
+                    }, this.data.timeout * 1000);
                   }
                   else {
                     console.log("Error Code: " + json.code);
