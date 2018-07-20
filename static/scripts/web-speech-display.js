@@ -2,12 +2,19 @@ AFRAME.registerComponent('web-speech-display', {
     schema: {
       lang: {type: 'string', default: 'en'},
       interimResults: {type: 'boolean', default: true},
+      timeout: {type: 'number', default: 5}
     },
   
     init: function () {
       easyrtc.enableMicrophone(false);
       let data = this.data;
-      this.recognizer = new webkitSpeechRecognition();
+      var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+      if (isChrome) {
+        this.recognizer = new webkitSpeechRecognition();
+      } else {
+        this.recognizer = new SpeechRecognition();
+      }
+      
       this.recognizer.continuous = true;
       this.recognizer.interimResults = data.interimResults;
       this.recognizer.lang = data.lang;
@@ -49,6 +56,9 @@ AFRAME.registerComponent('web-speech-display', {
           var result = event.results[event.results.length-1];
           if(result.isFinal) {
               this.el.setAttribute('text', {value: result[0].transcript});
+              setTimeout(()=>{
+                this.el.setAttribute('text', {value: ''});
+              }, this.data.timeout * 1000);
               console.log(result[0].transcript);
           }
       }
