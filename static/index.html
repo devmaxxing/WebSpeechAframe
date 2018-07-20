@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
     <script src="scripts/web-speech-display.js"></script>
+    <script src="scripts/follow-above-object.js"></script>
     <a-scene networked-scene="
       room: basic-audio;
       debug: true;
@@ -66,11 +67,12 @@
       </a-assets>
       
       <a-entity id="player" camera="userHeight: 1.6" look-controls networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls>
-        <a-entity text="value: Test" web-speech-display position="0 0.1 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
         <a-sphere class="head"
           visible="false"
         ></a-sphere>
       </a-entity>
+
+      <a-entity id="text" text="value: Test" web-speech-display follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
 
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0" material="color:#333333"></a-entity>
