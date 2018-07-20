@@ -76,6 +76,7 @@ AFRAME.registerComponent('web-speech-display', {
                   if(json.code == 200) {
                     console.log('flag4')
                     console.log("Translation Results: " + json.text[0]);
+                    this.el.setAttribute('text', {value: json.text[0]});
                   }
                   else {
                     console.log("Error Code: " + json.code);
