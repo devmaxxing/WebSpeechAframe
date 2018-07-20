@@ -72,7 +72,9 @@
         ></a-sphere>
       </a-entity>
 
-      <a-entity id="text" text="value: Test" web-speech-display follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
+      <a-entity id="text" follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false;">
+          <a-entity class="text" text="value: Test" web-speech-display ></a-entity>
+      </a-entity>
 
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0" material="color:#333333"></a-entity>
