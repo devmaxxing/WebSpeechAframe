@@ -78,7 +78,7 @@ AFRAME.registerComponent('web-speech-display', {
                     console.log("Translation Results: " + json.text[0]);
                     this.el.setAttribute('text', {value: json.text[0]});
                     if (this.timeout) {
-                      clearTimout(this.timeout);
+                      clearTimeout(this.timeout);
                     }
                     this.timeout = setTimeout(()=>{
                       this.el.setAttribute('text', {value: ''});
@@ -91,7 +91,7 @@ AFRAME.registerComponent('web-speech-display', {
             }
               this.el.setAttribute('text', {value: result[0].transcript});
               if (this.timeout) {
-                clearTimout(this.timeout);
+                clearTimeout(this.timeout);
               }
               this.timeout = setTimeout(()=>{
                 this.el.setAttribute('text', {value: ''});
