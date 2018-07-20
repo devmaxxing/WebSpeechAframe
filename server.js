@@ -27,6 +27,24 @@ var myIceServers = [
     {"url":"stun:stun2.l.google.com:19302"},
     {"url":"stun:stun3.l.google.com:19302"}
 ];
+
+// self provided turn servers
+if (process.env.STUN_SERVER) {
+    myIceServers = [
+      {"url":process.env.STUN_SERVER}
+    ]
+    var servers = process.env.TURN_SERVERS.split(",");
+    for (var i = 0; i < servers.length; i++) {
+      myIceServers.push(
+        {
+          "url":servers[i],
+          "username":process.env.TURN_USERNAME,
+          "credential":process.env.TURN_CREDENTIAL
+        }
+      )
+    }
+  }
+  
 easyrtc.setOption("appIceServers", myIceServers);
 easyrtc.setOption("logLevel", "debug");
 easyrtc.setOption("demosEnable", false);
