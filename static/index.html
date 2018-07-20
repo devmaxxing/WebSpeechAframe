@@ -19,7 +19,7 @@
       audio: true;
     ">
       <a-assets>
-        <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        <img id="sky" src="https://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
 
         <!-- Templates -->
 
@@ -73,7 +73,7 @@
         ></a-sphere>
       </a-entity>
 
-      <a-entity class="text" text web-speech-display id="text" follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false;">
+      <a-entity class="text" text web-speech-display id="text" follow-above-object="objectID:player" scale="3 3 3" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false;">
       </a-entity>
 
       <a-entity position="0 0 0"
@@ -114,6 +114,7 @@
         components: [
           'position',
           'rotation',
+          'scale',
           'text',
         ]
       });

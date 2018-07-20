@@ -13,7 +13,7 @@ AFRAME.registerComponent('follow-above-object', {
           var otherPosition = this.objectToFollow.getWorldPosition();
           var otherRotation = this.objectToFollow.getWorldRotation();
           this.el.setAttribute('position', otherPosition.x + " " + (otherPosition.y + 1) + " " + otherPosition.z);
-          this.el.setAttribute('rotation', otherRotation.x * RAD_TO_DEGREE + " " + otherRotation.y * RAD_TO_DEGREE * -1 + " " + otherRotation.z * RAD_TO_DEGREE);
+          this.el.setAttribute('rotation', otherRotation.x * RAD_TO_DEGREE + " " + (otherRotation.y * RAD_TO_DEGREE + 180) + " " + otherRotation.z * RAD_TO_DEGREE);
       }
     }
 });
