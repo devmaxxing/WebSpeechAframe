@@ -21,8 +21,9 @@
         <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
 
         <!-- Templates -->
-        <template id="player-template">
-          <a-entity></a-entity>
+
+        <template id="text-template">
+          <a-entity class="text"></a-entity>
         </template>
 
         <!-- Avatar -->
@@ -61,25 +62,16 @@
           </a-entity>
         </template>
 
-        <!-- Hand -->
-        <template id="hand-template">
-          <a-entity>
-            <a-box scale="0.1 0.1 0.1"></a-box>
-          </a-entity>
-        </template>
-
         <!-- /Templates -->
       </a-assets>
-      <a-entity text="value: Test" web-speech-display position="0 1.6 -1"></a-entity>
-      <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" wasd-controls>
+      
+      <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls>
+        <a-entity text="value: Test" web-speech-display position="0 1.8 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
         <a-entity camera="userHeight: 1.6" look-controls networked="template:#head-template;attachTemplateToLocal:false;">
             <a-sphere class="head"
               visible="false"
             ></a-sphere>
         </a-entity>
-
-        <a-entity hand-controls="left" networked="template:#hand-template;"></a-entity>
-        <a-entity hand-controls="right" networked="template:#hand-template;"></a-entity>
       </a-entity>
 
       <a-entity position="0 0 0"
@@ -112,6 +104,19 @@
             component: 'material',
             property: 'color'
           }
+        ]
+      });
+
+      NAF.schemas.add({
+        template: '#text-template',
+        components: [
+          'position',
+          'rotation',
+          {
+            selector: '.text',
+            component: 'text',
+            property: 'value'
+          },
         ]
       });
       // Called by Networked-Aframe when connected to server
