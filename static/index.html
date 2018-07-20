@@ -65,13 +65,11 @@
         <!-- /Templates -->
       </a-assets>
       
-      <a-entity id="player" networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls>
-        <a-entity text="value: Test" web-speech-display position="0 1.8 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
-        <a-entity camera="userHeight: 1.6" look-controls>
-            <a-sphere class="head"
-              visible="false"
-            ></a-sphere>
-        </a-entity>
+      <a-entity id="player" camera="userHeight: 1.6" look-controls networked="template:#avatar-template;attachTemplateToLocal:false;" wasd-controls>
+        <a-entity text="value: Test" web-speech-display position="0 0.1 0" networked="template:#text-template;attachTemplateToLocal:false"></a-entity>
+        <a-sphere class="head"
+          visible="false"
+        ></a-sphere>
       </a-entity>
 
       <a-entity position="0 0 0"
