@@ -74,8 +74,8 @@
         ></a-sphere>
       </a-entity>
 
-      <a-entity class="text" id="text" follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false;">
-      </a-entity class="text" text="value: Test" web-speech-display></a-entity>
+      <a-entity class="text" text="value: Test" web-speech-display id="text" follow-above-object="objectID:player" position="0 1.7 0" networked="template:#text-template;attachTemplateToLocal:false;">
+      </a-entity class="text" ></a-entity>
       </a-entity>
 
       <a-entity position="0 0 0"
@@ -116,11 +116,7 @@
         components: [
           'position',
           'rotation',
-          {
-            selector: '.text',
-            component: 'text',
-            property: 'value'
-          },
+          'text',
         ]
       });
       // Called by Networked-Aframe when connected to server
